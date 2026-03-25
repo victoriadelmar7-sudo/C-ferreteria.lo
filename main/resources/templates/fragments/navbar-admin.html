@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="navbar">
+
+    <header class="header-fijo">
+
+        <h1 class="titulo-principal">
+            Panel Administrador
+        </h1>
+
+        <nav class="navbar">
+
+            <div class="nav-container">
+
+                <ul class="nav-center">
+
+                    <li>
+                        <a th:href="@{/admin/dashboard}">
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/usuarios/vista}">
+                            Usuarios
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/productos/admin}">
+                            Productos
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/categorias}">
+                            Categorías
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/facturas/listar}">
+                            Pedidos
+                        </a>
+                    </li>
+
+                </ul>
+
+                <ul class="nav-right">
+
+                    <li>
+                        <a th:href="@{/}">
+                            Tienda
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/usuarios/logout}">
+                            Cerrar sesión
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+</th:block>
+
+</html>

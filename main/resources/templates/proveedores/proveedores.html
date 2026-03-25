@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Gestión de Proveedores</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<div class="contenedor-clientes">
+
+    <h2>Gestión de Proveedores</h2>
+
+    <!-- FORMULARIO PARA AGREGAR PROVEEDOR -->
+    <form th:action="@{/proveedores/guardar}" th:object="${proveedor}" method="post" class="form-clientes">
+
+        <input type="text" th:field="*{nombre}" placeholder="Nombre" required>
+
+        <input type="text" th:field="*{empresa}" placeholder="Empresa" required>
+
+        <input type="email" th:field="*{correo}" placeholder="Correo" required>
+
+        <input type="text" th:field="*{telefono}" placeholder="Teléfono" required>
+
+        <button type="submit" class="btn-guardar">
+            Guardar Proveedor
+        </button>
+
+    </form>
+
+    <br>
+
+    <!-- TABLA DE PROVEEDORES -->
+
+    <table class="tabla-clientes">
+
+        <thead>
+
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Empresa</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr th:each="p : ${proveedores}">
+
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.nombre}"></td>
+            <td th:text="${p.empresa}"></td>
+            <td th:text="${p.correo}"></td>
+            <td th:text="${p.telefono}"></td>
+
+            <td>
+
+                <a th:href="@{/proveedores/eliminar/{id}(id=${p.id})}" class="btn-eliminar">
+                    Eliminar
+                </a>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<header class="header-simple">
+    Ferretería El Desvare
+</header>
+
+<main class="checkout-container">
+
+    <!-- ========================= -->
+    <!-- FORMULARIO -->
+    <!-- ========================= -->
+
+    <div>
+
+        <!-- BOTON VOLVER -->
+        <div class="btn-volver-container">
+            <a th:href="@{/carrito/resumen}" class="btn-atras">
+                ← Volver
+            </a>
+        </div>
+
+        <!-- DATOS PERSONALES -->
+
+        <div class="checkout-card">
+
+            <h2>1. Datos personales</h2>
+
+            <p><strong>Correo:</strong> <span th:text="${session.usuario.correo}"></span></p>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" placeholder="Nombre">
+                </div>
+
+                <div class="form-group">
+                    <label>Apellidos</label>
+                    <input type="text" placeholder="Apellidos">
+                </div>
+
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="text" placeholder="Teléfono">
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo documento</label>
+                    <select>
+                        <option>Cédula</option>
+                        <option>Pasaporte</option>
+                    </select>
+                </div>
+
+                <div class="form-group full">
+                    <label>Documento</label>
+                    <input type="text" placeholder="Número documento">
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ENTREGA -->
+
+        <div class="checkout-card">
+
+            <h2>2. Entrega</h2>
+
+            <h4>Información del domicilio</h4>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Departamento</label>
+                    <select>
+                        <option>Amazonas</option>
+                        <option>Antioquia</option>
+                        <option>Arauca</option>
+                        <option>Atlántico</option>
+                        <option>Bogotá D.C.</option>
+                        <option>Bolívar</option>
+                        <option>Boyacá</option>
+                        <option>Caldas</option>
+                        <option>Caquetá</option>
+                        <option>Casanare</option>
+                        <option>Cauca</option>
+                        <option>Cesar</option>
+                        <option>Chocó</option>
+                        <option>Córdoba</option>
+                        <option>Cundinamarca</option>
+                        <option>Guainía</option>
+                        <option>Guaviare</option>
+                        <option>Huila</option>
+                        <option>La Guajira</option>
+                        <option>Magdalena</option>
+                        <option>Meta</option>
+                        <option>Nariño</option>
+                        <option>Norte de Santander</option>
+                        <option>Putumayo</option>
+                        <option>Quindío</option>
+                        <option>Risaralda</option>
+                        <option>San Andrés y Providencia</option>
+                        <option>Santander</option>
+                        <option>Sucre</option>
+                        <option>Tolima</option>
+                        <option>Valle del Cauca</option>
+                        <option>Vaupés</option>
+                        <option>Vichada</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Municipio</label>
+                    <select>
+                        <option>Medellín</option>
+                        <option>Bello</option>
+                        <option>Envigado</option>
+                        <option>Itagüí</option>
+                        <option>Rionegro</option>
+                        <option>Barranquilla</option>
+                        <option>Soledad</option>
+                        <option>Malambo</option>
+                        <option>Cartagena</option>
+                        <option>Magangué</option>
+                        <option>Turbaco</option>
+                        <option>Tunja</option>
+                        <option>Duitama</option>
+                        <option>Sogamoso</option>
+                        <option>Manizales</option>
+                        <option>Chinchiná</option>
+                        <option>Florencia</option>
+                        <option>Yopal</option>
+                        <option>Popayán</option>
+                        <option>Valledupar</option>
+                        <option>Quibdó</option>
+                        <option>Montería</option>
+                        <option>Bogotá D.C.</option>
+                        <option>Soacha</option>
+                        <option>Chía</option>
+                        <option>Zipaquirá</option>
+                        <option>Neiva</option>
+                        <option>Riohacha</option>
+                        <option>Santa Marta</option>
+                        <option>Villavicencio</option>
+                        <option>Pasto</option>
+                        <option>Cúcuta</option>
+                        <option>Mocoa</option>
+                        <option>Armenia</option>
+                        <option>Pereira</option>
+                        <option>San Andrés</option>
+                        <option>Bucaramanga</option>
+                        <option>Sincelejo</option>
+                        <option>Ibagué</option>
+                        <option>Cali</option>
+                        <option>Palmira</option>
+                        <option>Buenaventura</option>
+                        <option>Mitú</option>
+                        <option>Puerto Carreño</option>
+                    </select>
+                </div>
+
+                <div class="form-group full">
+                    <label>Dirección</label>
+                    <input type="text" placeholder="Dirección">
+                </div>
+
+                <div class="form-group full">
+                    <label>Información adicional</label>
+                    <input type="text" placeholder="Ej: apto 201">
+                </div>
+
+                <div class="form-group">
+                    <label>Barrio</label>
+                    <input type="text">
+                </div>
+
+                <div class="form-group">
+                    <label>Nombre quien recibe</label>
+                    <input type="text">
+                </div>
+
+            </div>
+
+            <div class="metodo-entrega">
+
+                <label>
+
+                    <input type="radio" name="entrega" checked>
+
+                    Entrega estándar
+                    <br>
+                    <small>En hasta 5 días hábiles</small>
+
+                </label>
+
+                <span>$10.000</span>
+
+            </div>
+
+        </div>
+
+        <!-- PAGO -->
+
+        <div class="checkout-card">
+
+            <h2>3. Pago</h2>
+
+            <p>Método de pago</p>
+
+            <div class="metodos-pago">
+
+                <label class="metodo-pago">
+
+                    <input type="radio" name="pago" checked>
+                    Tarjeta débito
+
+                </label>
+
+                <label class="metodo-pago">
+
+                    <input type="radio" name="pago">
+                    Tarjeta crédito
+
+                </label>
+
+                <label class="metodo-pago">
+
+                    <input type="radio" name="pago">
+                    PSE
+
+                </label>
+
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                <label>Número de tarjeta</label>
+                <input type="text">
+            </div>
+
+            <div class="form-group">
+                <label>Nombre en la tarjeta</label>
+                <input type="text">
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Mes</label>
+                    <input type="text" placeholder="MM">
+                </div>
+
+                <div class="form-group">
+                    <label>Año</label>
+                    <input type="text" placeholder="AA">
+                </div>
+
+                <div class="form-group">
+                    <label>Código seguridad</label>
+                    <input type="text">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- RESUMEN -->
+    <!-- ========================= -->
+
+    <div class="checkout-resumen">
+
+        <h3>Resumen de la compra</h3>
+
+        <div th:each="item : ${carrito}" class="item-resumen">
+
+            <div>
+
+                <p th:text="${item.producto.nombre}"></p>
+                <small th:text="${item.cantidad} + ' unidad(es)'"></small>
+
+            </div>
+
+            <strong>
+
+                $ <span th:text="${item.producto.precio * item.cantidad}"></span>
+
+            </strong>
+
+        </div>
+
+        <hr>
+
+        <div class="total-resumen">
+
+            <span>Subtotal</span>
+
+            <span>
+
+$ <span th:text="${total}"></span>
+
+</span>
+
+        </div>
+
+        <div class="total-resumen">
+
+            <span>Envío</span>
+
+            <span>$10.000</span>
+
+        </div>
+
+        <hr>
+
+        <div class="total-resumen">
+
+            <strong>Total</strong>
+
+            <strong>
+
+                $ <span th:text="${total + 10000}"></span>
+
+            </strong>
+
+        </div>
+
+        <br>
+
+        <form th:action="@{/carrito/finalizar}" method="post">
+
+            <button type="submit" class="btn-comprar">
+                Finalizar compra
+            </button>
+
+        </form>
+
+    </div>
+
+</main>
+
+</body>
+</html>

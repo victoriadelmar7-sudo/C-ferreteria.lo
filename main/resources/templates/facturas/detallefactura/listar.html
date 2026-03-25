@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Historial de pedidos</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div th:replace="~{fragments/navbar-admin :: navbar}"></div>
+
+<main>
+
+  <h2 class="titulo-seccion">Historial de pedidos</h2>
+
+  <!-- <p th:text="${#lists.size(facturas)}"></p> -->
+
+  <table class="tabla-pedidos">
+
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Fecha</th>
+      <th>Cliente</th>
+      <th>Total</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr th:each="f : ${facturas}">
+      <td th:text="${f.id}"></td>
+      <td th:text="${f.fecha}"></td>
+      <td th:text="${f.cliente.nombre}"></td>
+      <td th:text="${'$ ' + #numbers.formatDecimal(f.total, 0, 'COMMA', 0, 'POINT')}"></td>
+      <td>
+        <button th:attr="onclick='verDetallePedido(' + ${f.id} + ')'">
+          Ver detalles
+        </button>
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+
+</main>
+<div id="modalPedido" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);">
+
+  <div style="background:white; margin:10% auto; padding:20px; width:50%; border-radius:10px;">
+
+    <h2>Detalle del pedido</h2>
+
+    <div id="contenidoPedido"></div>
+
+    <button onclick="cerrarModal()">Cerrar</button>
+
+  </div>
+</div>
+
+</body>
+</html>

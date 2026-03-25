@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Accede a tu cuenta</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<div class="aviso-container">
+
+    <div class="aviso-box">
+
+        <h2>
+            ¡Hola! Para agregar al carrito,
+            <br>
+            ingresa a tu cuenta
+        </h2>
+
+        <a th:href="@{/usuarios/registro}" class="btn-crear">
+            Crear cuenta
+        </a>
+
+        <br>
+
+        <a th:href="@{/usuarios/login}" class="btn-ingresar">
+            Iniciar sesion
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

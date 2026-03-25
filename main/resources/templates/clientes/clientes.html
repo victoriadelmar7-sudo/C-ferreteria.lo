@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Clientes - Ferretería El Desvare</title>
+
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<header class="header-fijo">
+
+  <div class="titulo-principal">
+    <h1>Ferretería El Desvare</h1>
+  </div>
+
+</header>
+
+<main>
+
+  <div class="contenedor-clientes">
+
+    <h2>Gestión de Clientes</h2>
+
+    <!-- FORMULARIO -->
+    <form th:action="@{/clientes/guardar}" th:object="${cliente}" method="post" class="form-clientes">
+
+      <input type="text" th:field="*{nombre}" placeholder="Nombre" required>
+
+      <input type="text" th:field="*{telefono}" placeholder="Teléfono" required>
+
+      <input type="email" th:field="*{email}" placeholder="Correo" required>
+
+      <button type="submit" class="btn-guardar">
+        Guardar Cliente
+      </button>
+
+    </form>
+
+
+    <!-- TABLA -->
+    <table class="tabla-clientes">
+
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Teléfono</th>
+        <th>Email</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <tr th:each="c : ${clientes}">
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.nombre}"></td>
+        <td th:text="${c.telefono}"></td>
+        <td th:text="${c.email}"></td>
+
+        <td>
+          <a th:href="@{/clientes/eliminar/{id}(id=${c.id})}" class="btn-eliminar">
+            Eliminar
+          </a>
+        </td>
+      </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="navbar">
+
+    <header class="header-fijo">
+
+        <h1 class="titulo-principal">
+            Ferretería El Desvare
+        </h1>
+
+        <nav class="navbar">
+
+            <div class="nav-container">
+
+                <ul class="nav-center">
+
+                    <li>
+                        <a th:href="@{/}">Inicio</a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/productos}">Productos</a>
+                    </li>
+
+                    <li>
+
+                        <a href="#">
+                            Categorías ▼
+                        </a>
+
+                        <ul class="dropdown">
+
+                            <li>
+                                <a th:href="@{/categorias/1}">Herramientas</a>
+                            </li>
+
+                            <li>
+                                <a th:href="@{/categorias/2}">Materiales</a>
+                            </li>
+
+                            <li>
+                                <a th:href="@{/categorias/3}">Electricidad</a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                    <li>
+                        <a th:href="@{/contacto}">Contacto</a>
+                    </li>
+
+
+                    <!-- MENU VENDEDOR -->
+
+                    <li th:if="${session.usuario != null and session.usuario.rol.name() == 'VENDEDOR'}">
+                        <a th:href="@{/vendedor/dashboard}">Panel Vendedor</a>
+                    </li>
+
+                    <!-- MENU ADMIN -->
+
+                    <li th:if="${session.usuario != null and session.usuario.rol.name() == 'ADMIN'}">
+                        <a th:href="@{/admin/dashboard}">Panel Admin</a>
+                    </li>
+
+                </ul>
+
+
+                <ul class="nav-right">
+
+                    <li>
+                        <a th:href="@{/carrito}" class="icono-carrito">
+                            🛒
+
+                            <span class="contador-carrito"
+                                  th:if="${cantidadCarrito != null and cantidadCarrito > 0}"
+                                  th:text="${cantidadCarrito}">
+                            </span>
+                        </a>
+                    </li>
+                    <!-- NO LOGUEADO -->
+
+                    <li th:if="${session.usuario == null}">
+                        <a th:href="@{/usuarios/login}">Iniciar sesión</a>
+                    </li>
+
+                    <li th:if="${session.usuario == null}">
+                        <a th:href="@{/usuarios/registro}">Crear cuenta</a>
+                    </li>
+
+
+                    <!-- LOGUEADO -->
+
+                    <li th:if="${session.usuario != null}">
+
+                        <div class="user-container">
+
+                            <!-- NOMBRE CON DROPDOWN -->
+                            <div class="user-menu">
+
+                                <button class="user-btn">
+                                    👤 <span th:text="${session.usuario.nombre}"></span> ▼
+                                </button>
+
+                                <div class="dropdown-menu">
+                                    <a th:href="@{/perfil}">Mi perfil</a>
+                                    <a th:href="@{/pedidos}">Mis pedidos</a>
+                                </div>
+
+                            </div>
+
+                            <!-- CERRAR SESIÓN -->
+                            <a th:href="@{/usuarios/logout}" class="logout-btn">
+                                Cerrar sesión
+                            </a>
+
+                        </div>
+
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+</th:block>
+
+</html>

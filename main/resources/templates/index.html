@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ferretería</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<header class="header-fijo">
+
+    <div class="titulo-principal">
+        <h1>Ferretería El Desvare</h1>
+    </div>
+
+    <!-- NAVBAR -->
+    <div th:replace="~{fragments/navbar-cliente :: navbar}"></div>
+
+</header>
+
+<main>
+
+    <section class="presentacion">
+
+        <div class="texto">
+
+            <h2>Todo lo que necesites en un solo lugar</h2>
+
+            <p>
+                Bienvenido a Ferretería El Desvare, tu aliado de confianza
+                en construcción, remodelación y hogar.
+                Encuentra herramientas, materiales y productos
+                de excelente calidad al mejor precio.
+            </p>
+
+        </div>
+
+        <div class="imagen">
+            <img th:src="@{/imagenes/ferreteria.jpg}" alt="Ferreteria">
+        </div>
+
+    </section>
+
+    <h2 class="titulo-seccion">Productos Destacados</h2>
+
+    <div class="contenedor-productos">
+
+        <div class="card" th:each="producto : ${destacados}">
+
+            <h3 th:text="${producto.nombre}"></h3>
+
+            <p>
+                Precio: $
+                <span th:text="${#numbers.formatDecimal(producto.precio,0,'POINT',0,'COMMA')}"></span>
+            </p>
+
+            <!-- BOTON SI ESTA LOGUEADO -->
+            <form th:if="${session.usuario != null}"
+                  th:action="@{/carrito/agregar}"
+                  method="post">
+
+                <input type="hidden"
+                       name="productoId"
+                       th:value="${producto.id}"/>
+
+                <button type="submit" class="btn-comprar">
+                    <i class="fa-solid fa-cart-shopping"></i> Comprar
+                </button>
+
+            </form>
+
+            <!-- BOTON SI NO ESTA LOGUEADO -->
+            <a th:if="${session.usuario == null}"
+               th:href="@{/usuarios/login-aviso}"
+               class="btn-comprar">
+
+                <i class="fa-solid fa-cart-shopping"></i> Comprar
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script th:src="@{/js/script.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Resumen</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<header class="header-simple">
+    Ferretería El Desvare
+</header>
+
+<main>
+    <div class="btn-volver-container">
+        <a th:href="@{/carrito}" class="btn-atras">
+            ← Volver
+        </a>
+    </div>
+
+    <div class="resumen-card">
+
+        <h2>Resumen de compra</h2>
+
+        <table class="tabla">
+
+            <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="item : ${carrito}">
+
+                <td th:text="${item.producto.nombre}"></td>
+
+                <td>
+                    $ <span th:text="${item.producto.precio}"></span>
+                </td>
+
+                <td th:text="${item.cantidad}"></td>
+
+                <td>
+                    $ <span th:text="${item.producto.precio * item.cantidad}"></span>
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+        <h3 style="text-align:right;margin-top:20px;">
+            Total: $ <span th:text="${total}"></span>
+        </h3>
+
+        <a th:href="@{/carrito/checkout}">
+            <button class="btn-comprar">
+                Comprar ahora
+            </button>
+        </a>
+
+    </div>
+
+</main>
+
+</body>
+</html>

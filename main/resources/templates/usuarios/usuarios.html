@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ferretería El Desvare - Usuarios</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div th:replace="~{fragments/navbar-admin :: navbar}"></div>
+
+<main>
+
+    <h1 class="titulo-seccion">Gestión de Usuarios</h1>
+
+    </form>
+
+
+    <!-- TABLA CORRECTA -->
+    <table class="tabla">
+
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="u : ${usuarios}">
+
+            <td th:text="${u.idUsuario}"></td>
+            <td th:text="${u.nombre}"></td>
+            <td th:text="${u.correo}"></td>
+            <td th:text="${u.rol}"></td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</main>
+
+</body>
+</html>

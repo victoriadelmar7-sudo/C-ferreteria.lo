@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Productos</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<!-- 🔥 LLAMAR EL NAVBAR -->
+<div th:replace="fragments/navbar-admin :: navbar"></div>
+
+<main>
+
+  <h1 class="titulo-seccion">Gestión de Productos</h1>
+
+  <!-- FORMULARIO -->
+  <form th:action="@{/productos/guardar}" method="post" class="form-pro">
+
+    <input type="hidden" name="id" th:value="${producto.id}">
+
+    <div class="campo">
+      <label>Nombre</label>
+      <input type="text" name="nombre" th:value="${producto.nombre}" required>
+    </div>
+
+    <div class="campo">
+      <label>Precio</label>
+      <input type="number" name="precio" th:value="${producto.precio}" required>
+    </div>
+
+    <div class="campo">
+      <label>Stock</label>
+      <input type="number" name="stock" th:value="${producto.stock}" required>
+    </div>
+
+    <div class="campo">
+      <label>Proveedor</label>
+      <input type="text" name="proveedor.nombre"
+             th:value="${producto.proveedor != null ? producto.proveedor.nombre : ''}">
+    </div>
+
+    <button type="submit" class="btn-pro">
+      Guardar producto
+    </button>
+
+  </form>
+
+  <div class="tabla-container">
+    <table class="tabla">
+
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Proveedor</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+
+
+      <tbody>
+      <tr th:each="producto : ${productos}">
+        <td th:text="${producto.id}"></td>
+        <td th:text="${producto.nombre}"></td>
+        <td th:text="'$ ' + ${#numbers.formatDecimal(producto.precio, 0, 'POINT', 0, 'COMMA')}"></td>
+        <td th:text="${producto.stock}"></td>
+        <td th:text="${producto.proveedor != null ? producto.proveedor.nombre : 'Sin proveedor'}"></td>
+
+        <td>
+          <a th:href="@{'/admin/productos/editar/' + ${producto.id}}"
+             class="btn-editar">Editar</a>
+
+          <a th:href="@{'/admin/productos/eliminar/' + ${producto.id}}"
+             class="btn-eliminar">Eliminar</a>
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+</main>
+
+</body>
+</html>

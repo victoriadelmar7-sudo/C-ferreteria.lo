@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<header class="header-simple">
+    Ferretería El Desvare
+</header>
+
+<main>
+
+    <!-- BOTON VOLVER -->
+    <div class="btn-volver-container">
+        <a th:href="@{/productos}" class="btn-atras">
+            ← Volver
+        </a>
+    </div>
+
+    <div class="carrito-container">
+
+        <h2 style="text-align:center;margin-bottom:20px;">
+            Carrito de compras
+        </h2>
+
+        <div th:if="${mensaje}" class="mensaje-confirmacion">
+            <span th:text="${mensaje}"></span>
+        </div>
+
+        <div th:if="${carrito != null and !#lists.isEmpty(carrito)}">
+
+            <table class="tabla-carrito">
+
+                <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                    <th>Acción</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="item : ${carrito}">
+
+                    <td th:text="${item.producto.nombre}"></td>
+
+                    <td>
+                        $ <span th:text="${#numbers.formatDecimal(item.producto.precio, 0, 'COMMA', 0, 'POINT')}"></span>
+                    </td>
+
+                    <td class="cantidad-control">
+
+                        <form th:action="@{'/carrito/restar/' + ${item.id}}" method="post">
+                            <button type="submit">-</button>
+                        </form>
+
+                        <span th:text="${item.cantidad}"></span>
+
+                        <form th:action="@{'/carrito/sumar/' + ${item.id}}" method="post">
+                            <button type="submit">+</button>
+                        </form>
+
+                    </td>
+
+                    <td>
+                        $ <span th:text="${item.producto.precio * item.cantidad}"></span>
+                    </td>
+
+                    <td>
+
+                        <a th:href="@{/carrito/eliminar/{id}(id=${item.id})}" class="btn-eliminar">
+                            Eliminar
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+            <div class="carrito-acciones">
+
+                <h3 style="margin-right:auto;">
+                    Total: $ <span th:text="${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}"></span>
+                </h3>
+
+                <a th:href="@{/carrito/resumen}" class="btn-ir-pagar">
+                    Ir a pagar
+                </a>
+
+            </div>
+
+        </div>
+
+        <div th:if="${carrito == null or #lists.isEmpty(carrito)}">
+
+            <p style="text-align:center;font-size:18px;">
+                Tu carrito está vacío 🛒
+            </p>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>

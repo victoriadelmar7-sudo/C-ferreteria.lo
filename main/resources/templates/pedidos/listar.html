@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mis pedidos</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div th:replace='fragments/navbar-cliente :: navbar'></div>
+
+<main class="contenedor-pedidos">
+
+  <h2 class="titulo-pedidos">
+    📦 Historial de pedidos
+  </h2>
+
+  <!-- SI NO HAY PEDIDOS -->
+  <div th:if="${#lists.isEmpty(pedidos)}" class="sin-pedidos">
+    <p>No tienes pedidos aún 😢</p>
+  </div>
+
+  <!-- LISTA DE PEDIDOS -->
+  <div th:each="pedido : ${pedidos}" class="pedido-card">
+
+    <!-- HEADER -->
+    <div class="pedido-header">
+      <h3>Pedido #<span th:text="${pedido.id}"></span></h3>
+      <span class="fecha" th:text="${pedido.fecha}"></span>
+    </div>
+
+    <!-- TABLA -->
+    <table class="tabla-pedido">
+
+      <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Subtotal</th>
+      </tr>
+      </thead>
+
+      <tbody>
+
+      <tr th:each="d : ${pedido.detalles}">
+
+        <!-- PRODUCTO -->
+        <td th:text="${d.producto.nombre}"></td>
+
+        <!-- ✅ PRECIO CORRECTO -->
+        <td th:text="${'$ ' + #numbers.formatDecimal(d.precio, 0, 'COMMA', 0, 'POINT')}"></td>
+
+        <!-- CANTIDAD -->
+        <td th:text="${d.cantidad}"></td>
+
+        <!-- ✅ SUBTOTAL CORRECTO -->
+        <td th:text="${'$ ' + #numbers.formatDecimal(d.precio * d.cantidad, 0, 'COMMA', 0, 'POINT')}"></td>
+
+      </tr>
+
+      </tbody>
+
+    </table>
+
+    <!-- ✅ TOTAL -->
+    <div class="pedido-total"
+         th:text="${'Total: $ ' + #numbers.formatDecimal(pedido.total, 0, 'COMMA', 0, 'POINT')}">
+    </div>
+
+  </div>
+
+</main>
+
+</body>
+</html>

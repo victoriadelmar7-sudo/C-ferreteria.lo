@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Productos</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<header class="header-fijo">
+
+    <div class="titulo-principal">
+        <h1>Ferretería El Desvare</h1>
+    </div>
+
+    <div th:replace="~{fragments/navbar-cliente :: navbar}"></div>
+
+</header>
+
+<main>
+
+    <h2 class="titulo-seccion">
+        <span th:text="${categoria.nombre}"></span>
+    </h2>
+    <div th:if="${mensaje != null}" class="mensaje-confirmacion">
+        <span th:text="${mensaje}"></span>
+    </div>
+
+    <div class="contenedor-productos">
+
+        <div class="card"
+             th:each="producto : ${productos}">
+
+            <h3 th:text="${producto.nombre}"></h3>
+
+            <p class="precio">
+                Precio: $<span th:text="${#numbers.formatDecimal(producto.precio,0,'POINT',0,'COMMA')}"></span>
+            </p>
+
+
+            <p>
+                <strong>Stock:</strong>
+                <span th:text="${producto.stock}"></span>
+            </p>
+
+            <!-- USUARIO LOGUEADO -->
+
+            <form th:if="${session.usuario != null}"
+                  th:action="@{/carrito/agregar}"
+                  method="post">
+
+                <input type="hidden"
+                       name="productoId"
+                       th:value="${producto.id}">
+
+                <button type="submit" class="btn-comprar">
+                    <i class="fa-solid fa-cart-shopping"></i> Agregar al carrito
+                </button>
+
+            </form>
+
+            <!-- USUARIO NO LOGUEADO -->
+
+            <a th:if="${session.usuario == null}"
+               th:href="@{/usuarios/login(productoId=${producto.id})}"
+               class="btn-comprar">
+
+                <i class="fa-solid fa-cart-shopping"></i> Comprar
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+
+setTimeout(function(){
+
+    let mensaje = document.querySelector(".mensaje-confirmacion");
+
+    if(mensaje){
+        mensaje.style.display = "none";
+    }
+
+},3000);
+
+
+</script>
+</body>
+
+</html>
